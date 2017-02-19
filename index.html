@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="/reveal/css/reveal.css">
+		<link rel="stylesheet" href="/reveal/css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="/reveal/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal/css/print/pdf.css' : '/reveal/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+			mark, mark span {
+				color: yellow !important;
+				background-color: #3f3f3f;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>Single Horizontal Slide</section>
+        <section>
+            <section>Vertical Slide 1</section>
+            <section>Vertical Slide 2</section>
+        </section>
+				<section data-transition="none">
+<pre><code data-trim data-noescape>
+var buttonEl = document.getElementById('clickyMcButton')
+var buttonPowerEl = document.getElementById('buttonPower')
+
+
+var click$ = Rx.Observable.fromEvent(buttonEl, 'click');
+
+click$
+  .filter(() => buttonPowerEl.checked)
+  .subscribe(e => console.log('clicked'))
+
+var subscription;
+
+buttonPowerEl.addEventListener('click', function(e) {
+  if (e.target.checked) {
+    subscription = click$.subscribe(e => alert('clicked'))
+  } else {
+    subscription.unsubscribe()
+  }
+});
+
+</code></pre>
+</section>
+<section data-transition="none-in slide-out">
+  <pre><code data-trim data-noescape>
+defmodule Math do
+  <mark>def sum(a, b) do</mark>
+    <mark>a + b</mark>
+  <mark>end</mark>
+end
+</code></pre>
+</section>
+				<section>
+					<section>Single Horizontal Slide</section>
+					<section data-markdown="CONTRIBUTING.md"></section>
+				</section>
+			</div>
+		</div>
+
+		<script src="/reveal/lib/js/head.min.js"></script>
+		<script src="/reveal/js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				viewDistance: 3,
+				controls: false,
+				progress: false,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+
+			Reveal.addEventListener( 'fragmentshown', function( event ) {
+    		console.log(event);
+			});
+
+			Reveal.addEventListener( 'fragmenthidden', function( event ) {
+					console.log(event)
+			});
+
+			// window.addEventListener("mousedown", handleClick, false);
+			// window.addEventListener("contextmenu", function(e) { e.preventDefault(); }, false);
+
+			// function handleClick(e) {
+			// 	e.preventDefault();
+			// 	if(e.button === 0) Reveal.next(); 
+			// 	if(e.button === 2) Reveal.prev(); 
+			// }
+		</script>
+	</body>
+</html>
