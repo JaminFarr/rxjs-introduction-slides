@@ -37,7 +37,7 @@
             <section>Vertical Slide 2</section>
         </section>
 				<section data-transition="none">
-<pre><code data-trim data-noescape>
+<!--
 var buttonEl = document.getElementById('clickyMcButton')
 var buttonPowerEl = document.getElementById('buttonPower')
 
@@ -57,8 +57,34 @@ buttonPowerEl.addEventListener('click', function(e) {
     subscription.unsubscribe()
   }
 });
+-->
+<pre class="stretch"><code data-trim data-noescape>
+var buttonEl = document.getElementById('clickyMcButton')
+var buttonPowerEl = document.getElementById('buttonPower')
+
+
+var <span class="hl-0">click$</span> = Rx.Observable.fromEvent(buttonEl, 'click');
+
+<span class="hl-0 hl-1">click$</span>
+  <span class="hl-2">.filter(() => buttonPowerEl.checked)</span>
+  <span class="hl-2">.subscribe(e => console.log('clicked'))</span>
+
+<span class="hl-0 hl-2">var subscription;</span>
+
+buttonPowerEl.addEventListener('click', function(e) {
+  if (e.target.checked) {
+    subscription = click$.subscribe(e => alert('clicked'))
+  } else {
+    subscription.unsubscribe()
+  }
+});
 
 </code></pre>
+
+<span class="fragment"></span>
+<span class="fragment"></span>
+<span class="fragment"></span>
+
 </section>
 <section data-transition="none-in slide-out">
   <pre><code data-trim data-noescape>
@@ -75,7 +101,7 @@ end
 				</section>
 			</div>
 		</div>
-
+    <script src="js/Rx.min.js"></script>
 		<script src="reveal/lib/js/head.min.js"></script>
 		<script src="reveal/js/reveal.js"></script>
 
@@ -92,16 +118,9 @@ end
 					{ src: 'reveal/plugin/markdown/marked.js' },
 					{ src: 'reveal/plugin/markdown/markdown.js' },
 					{ src: 'reveal/plugin/notes/notes.js', async: true },
-					{ src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'js/highlighter.js', async: true, callback: function() { setupHighlighter(Reveal); } }
 				]
-			});
-
-			Reveal.addEventListener( 'fragmentshown', function( event ) {
-    		console.log(event);
-			});
-
-			Reveal.addEventListener( 'fragmenthidden', function( event ) {
-					console.log(event)
 			});
 
 			// window.addEventListener("mousedown", handleClick, false);
