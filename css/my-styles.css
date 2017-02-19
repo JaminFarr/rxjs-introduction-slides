@@ -1,12 +1,25 @@
 
+/* Code highlighting */
 .highlighted, .highlighted span {
   color: white !important;
+  transition: color 0.5s;
+}
+
+.was-highlighted, .was-highlighted span {
+  transition: color 0.5s;
 }
 
 .highlighted {
   background-color: #00f;
+  transition: background-color 0.5s;
 }
 
+.was-highlighted {
+  transition: background-color 0.5s;
+}
+
+
+/* Increase contrast for projector */
 .hljs {
   background: #000;
 }
