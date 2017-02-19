@@ -26,12 +26,17 @@ function setupHighlighter (reveal) {
     .filter(function (update) {
       return !isNaN(update.fragmentIndex)
     })
-    .subscribe(function (update) {
-      update.slideEl
-        .querySelectorAll('.hl-' + update.fragmentIndex)
-        .forEach(function (el, i) {
-          el.classList.remove('was-highlighted')
-          el.classList.add('highlighted')
-        })
-    })
+    .subscribe(
+      function (update) {
+        update.slideEl
+          .querySelectorAll('.hl-' + update.fragmentIndex)
+          .forEach(function (el, i) {
+            el.classList.remove('was-highlighted')
+            el.classList.add('highlighted')
+          })
+      },
+      function error (err) {
+          throw err
+      }
+    )
 }

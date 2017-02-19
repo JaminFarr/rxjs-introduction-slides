@@ -30,7 +30,7 @@
             <section>Vertical Slide 1</section>
             <section>Vertical Slide 2</section>
         </section>
-				<section data-transition="none">
+				<section>
 <!--
 var buttonEl = document.getElementById('clickyMcButton')
 var buttonPowerEl = document.getElementById('buttonPower')
@@ -77,17 +77,23 @@ buttonPowerEl.addEventListener('click', function(e) {
 
 <span class="fragment"></span>
 <span class="fragment"></span>
-<span class="fragment"></span>
 
 </section>
-<section data-transition="none-in slide-out">
-  <pre><code data-trim data-noescape>
-defmodule Math do
-  <mark>def sum(a, b) do</mark>
-    <mark>a + b</mark>
-  <mark>end</mark>
-end
-</code></pre>
+<section>
+	<img src="img/test1.gif"
+		data-fragment-src='{
+			"0": "img/test1.gif",
+			"1": "img/test2.gif"
+		}'
+	/>
+	<img src="img/test1.gif"
+		data-fragment-src='{
+			"0": "img/test1.gif",
+			"2": "img/test2.gif"
+		}'
+	/>
+	<span class="fragment"></span>
+	<span class="fragment"></span>
 </section>
 
 			</div>
@@ -102,7 +108,7 @@ end
 				history: true,
 				viewDistance: 3,
 				controls: false,
-				progress: false,
+				// progress: false,
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
@@ -110,18 +116,12 @@ end
 					{ src: 'reveal/plugin/markdown/markdown.js' },
 					{ src: 'reveal/plugin/notes/notes.js', async: true },
 					{ src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-          { src: 'js/highlighter.js', async: true, callback: function() { setupHighlighter(Reveal); } }
+          { src: 'js/highlighter.js', callback: function() { setupHighlighter(Reveal); } },
+					{ src: 'js/fragment-src.js', callback: function() { setupFragmentSrc(Reveal); } },
+					// { src: 'js/mouse-control.js', callback: function() { setupMouseControl(Reveal); } }
 				]
 			});
 
-			// window.addEventListener("mousedown", handleClick, false);
-			// window.addEventListener("contextmenu", function(e) { e.preventDefault(); }, false);
-
-			// function handleClick(e) {
-			// 	e.preventDefault();
-			// 	if(e.button === 0) Reveal.next(); 
-			// 	if(e.button === 2) Reveal.prev(); 
-			// }
 		</script>
 	</body>
 </html>
